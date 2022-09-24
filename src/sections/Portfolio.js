@@ -4,7 +4,7 @@ import {portfolios} from '../data/portfolioData';
 
 const Portfolio = () => {
 	const [allSample, setAllSample] = useState(portfolios)
-	const [filtered, setFiltered] = useState(portfolios);
+	const [filtered, setFiltered] = useState([]);
 	const [activeTag, setActiveTag] = useState('');
 	console.log(activeTag);
     return (
@@ -27,7 +27,7 @@ const Portfolio = () => {
 						<div className="filter-list">
 							<div className="portfolio-items">
 								<div className="row">
-								{portfolios.map((p) =><div className="column  graphic development wordpress mb_30 col-md-4 col-lg-4" key={p.id}>
+								{filtered.map((p) =><div className="column  graphic development wordpress mb_30 col-md-4 col-lg-4" key={p.id}>
 								<div className="default-portfolio-item">
 									<a href={p.imgUrl}  data-fancybox="gallery">
 									<img src={p.imgUrl} alt="image" />

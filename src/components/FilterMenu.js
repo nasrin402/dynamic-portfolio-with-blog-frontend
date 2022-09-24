@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const FilterMenu = ({allSample, setFiltered, activeTag, setActiveTag }) => {
+    useEffect(() =>{
+        if(activeTag === "all"){
+            setFiltered(allSample);
+            return
+        }
+        const filtered = allSample.filter((p)=>
+            p.tags.includes(activeTag)
+        );
+        setFiltered(filtered)
+    }, [activeTag])
     return (
         <div className="row">
         <div className="col-md-12">
