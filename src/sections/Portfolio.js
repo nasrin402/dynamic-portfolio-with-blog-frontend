@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import FilterMenu from '../components/FilterMenu';
 import {portfolios} from '../data/portfolioData';
-
 const Portfolio = () => {
 	const [allSample, setAllSample] = useState(portfolios)
-	const [filtered, setFiltered] = useState([]);
-	const [activeTag, setActiveTag] = useState('');
+	const [filtered, setFiltered] = useState(portfolios);
+	const [activeTag, setActiveTag] = useState('all');
 	console.log(activeTag);
     return (
         <section id="portfolio" name="portfolio" className="py_80 bg_deepblack full_row">
@@ -24,11 +23,11 @@ const Portfolio = () => {
 						activeTag={activeTag} setActiveTag={setActiveTag}
 						/>
 			              
-						<div className="filter-list">
+						<div  className="filter-list">
 							<div className="portfolio-items">
 								<div className="row">
 								{filtered.map((p) =><div className="column  graphic development wordpress mb_30 col-md-4 col-lg-4" key={p.id}>
-								<div className="default-portfolio-item">
+								<div  className="default-portfolio-item">
 									<a href={p.imgUrl}  data-fancybox="gallery">
 									<img src={p.imgUrl} alt="image" />
 										<div className="overlay-box">

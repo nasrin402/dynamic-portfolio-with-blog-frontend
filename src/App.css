@@ -1,4 +1,4 @@
-:root
+/* :root
 {
   --yellow: #F5C32C;
     --orange : #FCA61F;
@@ -15,9 +15,13 @@
     padding: 0.5rem 3.5rem;
     overflow: hidden;
     color: var(--black);    
+} */
+
+.slick-prev, .slick-next{
+ top:110%!important;
 }
-
-
-  
+.slick-dots li button{
+  display: none!important;
+}
 
   
