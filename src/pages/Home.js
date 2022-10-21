@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useLocation } from "react-router-dom";
+import { scroller } from "react-scroll";
 import Layout from '../components/layout/Layout';
+import { blogContext } from '../context/blogContext/blogContext';
 import AboutSection from '../sections/AboutSection';
 import BannerSection from '../sections/BannerSection';
 import BlogSection from '../sections/BlogSection';
@@ -11,7 +14,26 @@ import SkillSection from '../sections/SkillSection';
 import Testimonial from '../sections/Testimonial';
 
 const Home = () => {
+const location = useLocation();
+const {loaded} = useContext(blogContext);
+//console.log(scroller);
+useEffect(() =>{
+  if(location.state){
+    scroller.scrollTo(`${location.state}`,{
+      smooth: true,
+    })
+
+    //location.state = null
+
+    scroller.unregister(`${location.state}`)
+  }
+    
+},[location.state]);
+
     return (
+      <>
+      {loaded ?
+        
         <Layout>
         <BannerSection />
         <AboutSection />
@@ -23,6 +45,9 @@ const Home = () => {
         <BlogSection />
         <ContactSection />
       </Layout>
+      : "Loading ......."
+      }
+      </>
     );
 }
 

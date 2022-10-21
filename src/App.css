@@ -18,7 +18,25 @@
 } */
 
 .slick-prev, .slick-next{
- top:110%!important;
+  top: 110%!important;
+  width: 50px;
+  height: 50px;
+  line-height: 42px;
+  text-align: center;
+  border-radius: 50%;
+  border: 5px solid;
+  background-color: #ffb32f !important;
+  position: absolute;
+  
+}
+.slick-prev{
+  left: 45%;
+}
+.slick-next{
+  right: 45%;
+}
+.slick-next::before, .slick-prev::before {
+  line-height: 2!important;
 }
 .slick-dots li button{
   display: none!important;

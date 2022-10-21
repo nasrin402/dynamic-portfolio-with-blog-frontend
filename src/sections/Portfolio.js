@@ -5,7 +5,7 @@ const Portfolio = () => {
 	const [allSample, setAllSample] = useState(portfolios)
 	const [filtered, setFiltered] = useState(portfolios);
 	const [activeTag, setActiveTag] = useState('all');
-	console.log(activeTag);
+
     return (
         <section id="portfolio" name="portfolio" className="py_80 bg_deepblack full_row">
 		<div className="container">

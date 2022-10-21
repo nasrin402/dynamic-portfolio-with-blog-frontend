@@ -1,5 +1,6 @@
 import {
     ADD_BLOG,
+    ADD_COMMENT,
     DELETE_BLOG,
     LOAD_BLOG,
     UPDATE_BLOG
@@ -7,9 +8,10 @@ import {
 
 const blogsReducer = (state, action) =>{
     const {type, payload} = action;
+    console.log(payload)
     switch(type){
         case LOAD_BLOG:
-            return payload;
+            return [...payload];
         
         case DELETE_BLOG:
             return state.filter((blog) => blog.id !== payload);
@@ -20,6 +22,12 @@ const blogsReducer = (state, action) =>{
             }
         return [newBlog, ...state];
 
+        case ADD_COMMENT:
+            const newComment = {
+                ...payload
+            }
+        return [newComment, ...state]
+        
         case UPDATE_BLOG:
             const {id, blogToUpdate} = payload;
             const blogs = state.map((blog) =>{

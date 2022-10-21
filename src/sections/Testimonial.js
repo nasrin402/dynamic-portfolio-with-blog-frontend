@@ -49,7 +49,7 @@ const Testimonial = () => {
 				<div className="col-md-12 col-lg-12">
     				
 					<Slider {...settings}>
-					{reviews.map((r) =><div className="member_feedback color_lightgray p_30">
+					{reviews.map((r) =><div className="member_feedback color_lightgray p_30" key={r.id}>
 					<div className="client_img"><img src={r.imgUrl} alt="image"/></div>
 					<div className="star d-inline-block mt_30 color_default">
 						<ul>
