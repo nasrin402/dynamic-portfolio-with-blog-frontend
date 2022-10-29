@@ -66,7 +66,7 @@ const Register = () => {
 										<div className="form-group">
 											<input {...register("profileImg", { required: true })} className="form-control bg_black" type="file" name="profileImg" placeholder="Upload profile image" />
 										</div>
-	</div> */}
+									</div> */}
 									
 									
 									<div className="col-md-12 col-lg-12">

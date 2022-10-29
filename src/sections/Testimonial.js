@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Slider from "react-slick";
+import { blogContext } from '../context/blogContext/blogContext';
 import {reviews} from '../data/testimonialData';
+
 const Testimonial = () => {
+	const {testimonial} = useContext(blogContext);
+	console.log(testimonial);
 	const settings = {
 		dots: true,
 		infinite: false,
@@ -43,21 +47,19 @@ const Testimonial = () => {
 				<div className="col-md-12 col-lg-12">
 					<div className="section_title_1 color_white text-center mx-auto pb_60 wow animated slideInUp">
 	                    <h2 className="title text-uppercase"><span className="line_double mx-auto color_default">testimonial</span>What Client Say’s</h2>
-	                    <span className="sub_title color_lightgray">Interdum a etiam sagittis vehicula porta. Massa felis eros quam blandit nulla dolor habitant. Ullamcorper quis ornare et proin pellentesque.</span>
+	                    <span className="sub_title color_lightgray"> {testimonial?.sectionHeading}</span>
 	                </div>
 				</div>
 				<div className="col-md-12 col-lg-12">
     				
 					<Slider {...settings}>
-					{reviews.map((r) =><div className="member_feedback color_lightgray p_30" key={r.id}>
-					<div className="client_img"><img src={r.imgUrl} alt="image"/></div>
+					{testimonial?.testimonial?.map((r) =><div className="member_feedback color_lightgray p_30" key={r.id}>
+					<div className="client_img"><img src={r?.clientImg?.data?.attributes?.url} alt="image"/></div>
 					<div className="star d-inline-block mt_30 color_default">
 						<ul>
-							<li><i className="fa fa-star" aria-hidden="true"></i></li>
-							<li><i className="fa fa-star" aria-hidden="true"></i></li>
-							<li><i className="fa fa-star" aria-hidden="true"></i></li>
-							<li><i className="fa fa-star" aria-hidden="true"></i></li>
-							<li><i className="fa fa-star" aria-hidden="true"></i></li>
+						{r?.rating?.map((rating) =><li key={rating.id}><i className="fa fa-star" aria-hidden="true"></i></li>)}
+							
+							
 						</ul>
 					</div>
 					<h5 className="color_gray mb_15">{r.name}</h5>

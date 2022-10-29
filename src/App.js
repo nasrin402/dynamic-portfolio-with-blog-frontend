@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import './App.css';
+import Categories from "./pages/Category";
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blogs />} />
+        <Route path="/category/:catId" element={<Categories />} />
         <Route path="/blog-details/:blogId" element={<BlogDetails />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

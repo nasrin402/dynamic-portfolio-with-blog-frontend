@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { format } from 'date-fns'
+import React, { useContext } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { format } from 'date-fns';
 import { blogContext } from '../../context/blogContext/blogContext';
-import { Link, } from 'react-router-dom';
-const BlogContents = () => {
-    const {posts, loaded} = useContext(blogContext);
-    console.log(posts);
-
+const CatContents = () => {
+    const {catId} = useParams();
+    const {categories, loaded} = useContext(blogContext);
+    const findCategory = categories.find(cat => cat.attributes.slug === catId);
+    console.log(catId)
+    console.log(findCategory);
     return (
-        <>
-        {loaded ? 
         <div className="col-md-7 col-lg-8">
-            {posts.length ? <>
-                  {posts?.map((post) =>
+            {findCategory?.attributes?.blogs?.data.length ? <>
+                  {findCategory?.attributes?.blogs?.data.map((post) =>
                     <div className="blog_list mb_60" key={post.id}>
                     <div className="blog_item mb_30 wow animated slideInUp">
                         <div className="comments">
@@ -19,25 +19,25 @@ const BlogContents = () => {
                             <span className="color_white">12</span>
                         </div>
                         <div className="blog_img overlay_one">
-                            <img src={post?.blogThumb?.data?.attributes?.url} alt="image" />
+                            <img src={post?.attributes?.blogThumb?.data?.attributes?.url} alt="image" />
                         </div>
                         <div className="blog_content bg_white">
                             <div className="blog_title">
                                 <Link className="color_primary" to={`/blog-details/${post.slug}`}
                                     ><h5>
-                                        {post?.title}
+                                        {post?.attributes?.title}
                                     </h5></Link>
                             </div>
                             <p className="mt_15 mb_30">
-                               {post?.description.substring(0, 150)} &hellip;
+                               {post?.attributes?.description} &hellip;
                             </p>
 
                             <div className="admin">
-                                <img src={post?.author?.data?.attributes?.profileImg?.data?.attributes?.url} alt="image" />
-                                <span className="color_white">By - {post?.author?.data?.attributes?.username}</span>
+                                <img src={post?.attributes?.author?.data?.attributes?.profileImg?.data?.attributes?.url} alt="image" />
+                                <span className="color_white">By - {post?.attributes?.author?.data?.attributes?.username}</span>
                             </div>
                             <div className="date float-right color_primary">
-                               {format(new Date(post.dateOfPublish), 'MMM dd yyyy')}
+                               {format(new Date(post?.attributes?.dateOfPublish), 'MMM dd yyyy')}
                             </div>
                         </div>
                     </div>
@@ -65,10 +65,7 @@ const BlogContents = () => {
                           </ul>
                       </nav>*/}
         </div>
-         : <p>Loading.....</p>      
-                  }      
-        </>
-                );
+    );
 }
 
-export default BlogContents;
+export default CatContents;

@@ -5,7 +5,7 @@ import App from "./App";
 import AuthProvider from "./context/authContext/AuthContext";
 import "react-toastify/dist/ReactToastify.min.css";
 import { BlogContext } from "./context/blogContext/blogContext";
-
+import "venobox/dist/venobox.min.css";
 ReactDOM.render(
   <BrowserRouter>
     <AuthProvider>

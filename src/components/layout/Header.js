@@ -6,7 +6,7 @@ import { Link } from 'react-scroll'
 const Header = () => {
     const {pathname} = useLocation();
 
-console.log(pathname);
+
     function handleScroll() {
         const scrollValue = window.scrollY
         if(scrollValue >= 500){

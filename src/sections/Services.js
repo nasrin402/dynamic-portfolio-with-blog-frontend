@@ -4,7 +4,7 @@ import * as falicon from 'react-icons/fa';
 
 const Services = () => {
   const { services } = useContext(blogContext);
-  console.log(services);
+  //console.log(services);
   return (
     <section id="services" name="services" className="py_80 bg_black full_row">
       <div className="container">

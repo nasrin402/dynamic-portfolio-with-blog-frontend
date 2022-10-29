@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FilterMenu from '../components/FilterMenu';
 import {portfolios} from '../data/portfolioData';
+import Venobox from 'venobox'
+
 const Portfolio = () => {
 	const [allSample, setAllSample] = useState(portfolios)
 	const [filtered, setFiltered] = useState(portfolios);
 	const [activeTag, setActiveTag] = useState('all');
 
+	useEffect(() => {
+		new Venobox({
+			selector: '.my-image-links',
+			numeration: true,
+			infinigall: true,
+			share: true,
+			spinner: 'rotating-plane'
+		});
+	}, []);
     return (
         <section id="portfolio" name="portfolio" className="py_80 bg_deepblack full_row">
 		<div className="container">
@@ -28,7 +39,7 @@ const Portfolio = () => {
 								<div className="row">
 								{filtered.map((p) =><div className="column  graphic development wordpress mb_30 col-md-4 col-lg-4" key={p.id}>
 								<div  className="default-portfolio-item">
-									<a href={p.imgUrl}  data-fancybox="gallery">
+									<a className='my-image-links' href={p.imgUrl}  data-gall="gallery01">
 									<img src={p.imgUrl} alt="image" />
 										<div className="overlay-box">
 											<span><i className="fa fa-eye" aria-hidden="true"></i></span>

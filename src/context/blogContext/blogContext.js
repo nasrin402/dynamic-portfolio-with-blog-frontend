@@ -23,17 +23,20 @@ export const BlogContext = ({children}) =>{
     const [homPageInfo, setHomePageInfo] = useState({})
     const [blog, setBlog] = useState({});
     const [bComments, setbComments] = useState([]);
+    const [testimonial, setTestimonial] = useState({});
     const [isRender, setIsRender] = useState(false);
     const [blogLoaded, setBlogLoaded] = useState(false);
     const [services, setServices] = useState([])
+    const [categories, setCategories] = useState([])
 
     const location = useLocation();
     const navigate = useNavigate();
     useEffect(() =>{
         homePage();
         loadPosts();
-        serviceSection()
-        
+        serviceSection();
+        testimonialSection();
+        loadCategories();
     },[isRender,]);
 
     const homePage = async() =>{
@@ -75,6 +78,25 @@ export const BlogContext = ({children}) =>{
             console.log(err.message);
         }
     }
+    const testimonialSection = async() =>{
+        const query = qs.stringify({
+            populate: ['testimonial', 'testimonial.rating', 'testimonial.clientImg']
+        },
+        {
+            encodeValuesOnly: true,
+          })
+
+          try{
+            const response = await axiosPublicInstance.get(`/testimonial-section?${query}`);
+            const loadedReview = response.data?.data?.attributes
+            setTestimonial(loadedReview)
+            //console.log(loadedHome);
+            setLoaded(true)
+          }catch (err){
+            setLoaded(true)
+            console.log(err.message);
+        }
+    }
 
     const loadPosts = async () =>{
         const query = qs.stringify({
@@ -88,7 +110,7 @@ export const BlogContext = ({children}) =>{
             const response = await axiosPublicInstance.get(`/blogs?${query}`);
             const loadedPosts =  response.data.data.map((post) => formatePost(post));
           
-          
+          console.log(loadedPosts)
             //dispatch({type:LOAD_BLOG, payload:loadedPosts });
             setPosts(loadedPosts);
             setLoaded(true);
@@ -96,6 +118,28 @@ export const BlogContext = ({children}) =>{
             setLoaded(true)
             console.log(err.response);
         }
+    }
+
+    const loadCategories = async () =>{
+        const query = qs.stringify({
+            populate:['blogs', 'blogs.blogThumb', 'blogs.author', 'blogs.author.profileImg',] 
+         },
+         {
+             encodeValuesOnly: true,
+           })
+ 
+           try{
+             const response = await axiosPublicInstance.get(`/categories?${query}`);
+             const loadedCategories =  response.data.data;
+           
+           
+             //dispatch({type:LOAD_BLOG, payload:loadedPosts });
+             setCategories(loadedCategories);
+             setLoaded(true);
+         }catch (err){
+             setLoaded(true)
+             console.log(err.response);
+         }
     }
     const addComments = async(data) =>{
         try{
@@ -145,7 +189,9 @@ export const BlogContext = ({children}) =>{
         bComments,
         fetchBlog,
         blogLoaded,
-        services
+        services,
+        testimonial,
+        categories
     }
 
     return (

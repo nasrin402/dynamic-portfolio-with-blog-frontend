@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import blog1 from '../img/blog/01.jpg'
 import blog2 from '../img/blog/02.jpg'
 import blog3 from '../img/blog/03.jpg'
@@ -10,8 +10,10 @@ import { blogContext } from '../context/blogContext/blogContext';
 const BlogSection = () => {
 	const {posts} = useContext(blogContext);
 
-	const [blogSec, setBlogSec] = useState(posts)
-
+	//const [blogSec, setBlogSec] = useState(posts)
+	const blogSec = posts;
+	console.log(blogSec);
+	console.log(posts);
     return (
         <section id="blog" name="blog" className="py_80 bg_deepblack full_row">
 		<div className="container">
