@@ -1,5 +1,5 @@
 //export const API_URL = 'https://dynamic-portfolio-app-server.herokuapp.com/api' // Production
-export const API_URL = 'http://localhost:1337/api' // Development
+//export const API_URL = 'http://localhost:1337/api' // Development
 
 const prod = {
     url: {
