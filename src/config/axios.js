@@ -1,18 +1,21 @@
 import axios from 'axios'
+import { config, API_URL } from './Contants';
 
-//const isProduction = import.meta.env.PROD;
 
+const url = config.url.API_URL
 
 export const axiosPublicInstance = axios.create({
-    baseURL:'http://localhost:1337/api'
+    baseURL:url
 })
 
 export const axiosPrivateInstance = (token) =>axios.create({
-    baseURL:'http://localhost:1337/api',
+    baseURL:url,
     headers:{
         Authorization: `Bearer ${token}`
     }
 })
+
+
 
 
 

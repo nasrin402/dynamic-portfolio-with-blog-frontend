@@ -2,10 +2,26 @@ import React, { useContext, useEffect, useState } from 'react';
 import { format } from 'date-fns'
 import { blogContext } from '../../context/blogContext/blogContext';
 import { Link, } from 'react-router-dom';
-const BlogContents = () => {
-    const {posts, loaded} = useContext(blogContext);
-    console.log(posts);
 
+ // make array based on pageCount
+ const generateArr = (num) => {
+    const arr = []
+    for (let i = 1; i <= num; i++) {
+        arr.push(i)
+    }
+    return arr
+}
+
+const BlogContents = () => {
+    const {posts, loaded,setPageNumber,pageNumber,pageCount} = useContext(blogContext);
+    //console.log(posts);
+   
+    const pageCountArray = generateArr(pageCount);
+    // setting page number for pagination
+	const handlePageClick = (evt) => {
+        console.log(+evt.target.dataset.count);
+		setPageNumber(+evt.target.dataset.count)
+	}
     return (
         <>
         {loaded ? 
@@ -46,24 +62,17 @@ const BlogContents = () => {
                 </div>
                     )}
                     </>: <p>No posts found.</p>}     
-                      {/*<nav>
+                      <nav>
                           <ul className="pagination wow animated slideInUp full_row">
-                              <li className="page-item active">
-                                  <a className="page-link" href="#">1</a>
-                              </li>
-                              <li className="page-item">
-                                  <a className="page-link" href="#">2</a>
-                              </li>
-                              <li className="page-item">
-                                  <a className="page-link" href="#">3</a>
-                              </li>
-                              <li className="page-item">
-                                  <a className="page-link" href="#"
-                                      ><i className="fa fa-angle-right" aria-hidden="true"></i
-                                  ></a>
-                              </li>
+                            {pageCountArray?.map((count,index)=>{
+                                return (
+                                    <li key={index} className={`page-item ${count === pageNumber ? 'active' : ''}`}>
+                                    <a className="page-link" data-count={count} onClick={handlePageClick}>{count}</a>
+                                    </li> 
+                                )
+                            })}
                           </ul>
-                      </nav>*/}
+                      </nav>
         </div>
          : <p>Loading.....</p>      
                   }      

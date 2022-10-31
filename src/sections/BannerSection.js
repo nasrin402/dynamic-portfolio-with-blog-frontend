@@ -5,7 +5,7 @@ import Typed from 'react-typed';
 const BannerSection = () => {
     const {homPageInfo, loaded} = useContext(blogContext);
 
-   const totalInfo = homPageInfo.bannerSection;
+   const totalInfo = homPageInfo?.bannerSection;
    
 const {
     fullName,

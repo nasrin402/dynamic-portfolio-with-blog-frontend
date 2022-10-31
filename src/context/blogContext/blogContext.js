@@ -28,16 +28,19 @@ export const BlogContext = ({children}) =>{
     const [blogLoaded, setBlogLoaded] = useState(false);
     const [services, setServices] = useState([])
     const [categories, setCategories] = useState([])
+    const [pageNumber,setPageNumber] = useState(1)
+    const [pageCount,setPageCount] = useState(null)
 
     const location = useLocation();
     const navigate = useNavigate();
+ 
     useEffect(() =>{
         homePage();
         loadPosts();
         serviceSection();
         testimonialSection();
         loadCategories();
-    },[isRender,]);
+    },[isRender,pageNumber]);
 
     const homePage = async() =>{
         const query = qs.stringify({
@@ -100,7 +103,11 @@ export const BlogContext = ({children}) =>{
 
     const loadPosts = async () =>{
         const query = qs.stringify({
-           populate:['author', 'author.profileImg', 'category', 'blogThumb', 'comments'] 
+           populate:['author', 'author.profileImg', 'category', 'blogThumb', 'comments'],
+           pagination:{
+            page:pageNumber,
+            pageSize:3
+          }
         },
         {
             encodeValuesOnly: true,
@@ -109,10 +116,11 @@ export const BlogContext = ({children}) =>{
           try{
             const response = await axiosPublicInstance.get(`/blogs?${query}`);
             const loadedPosts =  response.data.data.map((post) => formatePost(post));
-          
-          console.log(loadedPosts)
+            
+          console.log(response.data)
             //dispatch({type:LOAD_BLOG, payload:loadedPosts });
             setPosts(loadedPosts);
+            setPageCount(response.data?.meta?.pagination?.pageCount)
             setLoaded(true);
         }catch (err){
             setLoaded(true)
@@ -191,7 +199,10 @@ export const BlogContext = ({children}) =>{
         blogLoaded,
         services,
         testimonial,
-        categories
+        categories,
+        setPageNumber,
+        pageNumber,
+        pageCount
     }
 
     return (

@@ -7,7 +7,7 @@ const BlogSidebar = () => {
 
   const recentPost = posts.map((p) => p);
   const reversePost = recentPost.reverse();
-  console.log(reversePost);
+ 
   return (
     <div className="blog_sidebar ">
       <div className="widget mb_60 d-inline-block p_30 bg_white full_row wow animated slideInUp">

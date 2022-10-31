@@ -5,7 +5,7 @@ import {reviews} from '../data/testimonialData';
 
 const Testimonial = () => {
 	const {testimonial} = useContext(blogContext);
-	console.log(testimonial);
+	
 	const settings = {
 		dots: true,
 		infinite: false,
